@@ -17,7 +17,7 @@ export const meta: MetaFunction = () => {
 
 export default function App() {
   return (
-    <Document>
+    <Document title='Github Profile'>
       <ChakraProvider>
         <Outlet />
       </ChakraProvider>

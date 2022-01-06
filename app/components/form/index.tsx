@@ -1,37 +1,29 @@
 import { useState } from 'react'
-import {
-  Button,
-  FormControl,
-  Input,
-  FormLabel,
-} from '@chakra-ui/react'
+import { Button, FormControl, Input, FormLabel } from '@chakra-ui/react'
 import { Search2Icon } from '@chakra-ui/icons'
+import { Form as RemixForm } from 'remix'
 
 export type FormProps = {
   isLoading: boolean
-  onSubmit: (username: string) => void
 }
 
-export const Form = ({isLoading, onSubmit}: FormProps) => {
+export const Form = ({ isLoading }: FormProps) => {
   const [inputValue, setInputValue] = useState('')
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value)
   }
 
-  const handleSubmit = (event:  React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    onSubmit(inputValue)
-  }
-
   return (
-    <form method="post" action={`github/${inputValue}`} onSubmit={handleSubmit}>
+    <RemixForm method="post">
       <FormControl>
-        <FormLabel htmlFor="name">First name</FormLabel>
+        <FormLabel htmlFor="username">First name</FormLabel>
         <Input
-          id="name"
+          id="username"
+          name="username"
           placeholder="Search for a user on github"
           onChange={handleChange}
+          value={inputValue}
         />
       </FormControl>
       <Button
@@ -46,6 +38,6 @@ export const Form = ({isLoading, onSubmit}: FormProps) => {
         <span>Search</span>
         <Search2Icon w={5} h={5} />
       </Button>
-    </form>
+    </RemixForm>
   )
 }

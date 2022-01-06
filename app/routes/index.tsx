@@ -1,32 +1,22 @@
+import { Heading } from '@chakra-ui/react'
+import { ActionFunction, redirect } from 'remix'
+import { Form } from '~/components/form'
+import { Wrapper } from '~/components/wrapper'
+
+export const action: ActionFunction = async ({ request }) => {
+  const formData = await request.formData()
+  const { username } = Object.fromEntries(formData)
+
+  return redirect(`/profile/${username}`)
+}
+
 export default function Index() {
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
-    </div>
-  );
+    <Wrapper>
+      <Heading as="h1" size="3xl">
+        Search for a profile on github.
+      </Heading>
+      <Form isLoading={false} />
+    </Wrapper>
+  )
 }
