@@ -10,9 +10,14 @@ import {
 import type { MetaFunction } from 'remix'
 import { ChakraProvider,Box,Heading } from '@chakra-ui/react'
 import React from 'react'
+import styles from "~/styles/global.css";
 
 export const meta: MetaFunction = () => {
   return { title: 'New Remix App' }
+}
+
+export function links() {
+  return [{ rel: "stylesheet", href: styles }];
 }
 
 export default function App() {
