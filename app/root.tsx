@@ -7,23 +7,20 @@ import {
   ScrollRestoration,
   useCatch
 } from 'remix'
-import type { MetaFunction } from 'remix'
-import { ChakraProvider,Box,Heading } from '@chakra-ui/react'
 import React from 'react'
-import styles from "~/styles/global.css";
+import type { MetaFunction } from 'remix'
+import { ChakraProvider, Box, Heading, CSSReset } from '@chakra-ui/react'
+import { theme } from '~/styles/theme'
 
 export const meta: MetaFunction = () => {
   return { title: 'New Remix App' }
 }
 
-export function links() {
-  return [{ rel: "stylesheet", href: styles }];
-}
-
 export default function App() {
   return (
-    <Document title='Github Profile'>
-      <ChakraProvider>
+    <Document title="Github Profile">
+      <ChakraProvider theme={theme}>
+        <CSSReset />
         <Outlet />
       </ChakraProvider>
     </Document>
@@ -33,10 +30,10 @@ export default function App() {
 // https://remix.run/docs/en/v1/api/conventions#errorboundary
 export function ErrorBoundary({ error }: { error: Error }) {
   return (
-    <Document title='Error!'>
+    <Document title="Error!">
       <ChakraProvider>
         <Box>
-          <Heading as='h1'>There was an error</Heading>
+          <Heading as="h1">There was an error</Heading>
         </Box>
       </ChakraProvider>
     </Document>
@@ -51,7 +48,7 @@ export function CatchBoundary() {
     <Document title={`${caught.status} ${caught.statusText}`}>
       <ChakraProvider>
         <Box>
-          <Heading as='h1'>
+          <Heading as="h1">
             {caught.status} {caught.statusText}
           </Heading>
         </Box>
