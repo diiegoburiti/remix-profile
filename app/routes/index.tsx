@@ -14,7 +14,7 @@ export default function Index() {
   return (
     <Wrapper>
       <Heading as="h1" size="3xl">
-        Search for a profile on github.
+        Search for a user on github :)
       </Heading>
       <Form isLoading={false} />
     </Wrapper>
