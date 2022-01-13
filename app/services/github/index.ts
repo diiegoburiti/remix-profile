@@ -20,6 +20,11 @@ export const getGithubProfile = async (username: string) => {
       Authorization: `token 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`
     }
   })
+
+  if(res.status !== 200) {
+    throw new Response("Oops! something went wrong. Please try again later", { status: res.status });
+  }
+
   const { bio, name, avatar_url, html_url, location, login }: UserTypes = await res.json()
 
   return {
