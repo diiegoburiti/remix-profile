@@ -5,7 +5,7 @@ import {
   useCatch,
   Link
 } from 'remix'
-import { Summary } from '~/components/sumamry'
+import { Summary } from '~/components/summary'
 import { Wrapper } from '~/components/wrapper'
 import { getGithubProfile, LoaderData } from '~/services/github'
 import { ArrowBackIcon } from '@chakra-ui/icons'
