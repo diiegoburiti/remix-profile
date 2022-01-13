@@ -12,9 +12,18 @@ export const action: ActionFunction = async ({ request }) => {
 
 export default function Index() {
   return (
-    <Wrapper>
-      <Heading as="h1" size="3xl">
-        Search for a user on github :)
+    <Wrapper
+    d='flex'
+    flexDir='column'
+    gap='20px'
+    alignSelf='center'
+    transform='translateY(10vh)'
+    >
+      <Heading as="h1" size="3xl" color='fontColor' textAlign='center' mb='24'>
+        Search for a user <br /> on 
+        <br />
+        github :)
+
       </Heading>
       <Form isLoading={false} />
     </Wrapper>
