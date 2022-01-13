@@ -7,4 +7,11 @@ export const theme = extendTheme({
     fontColor: '#ebf8ff',
     borderColor: '#D53F8C'
   },
+  styles: {
+    global: () => ({
+      body: {
+        background: 'mainBg'
+      }
+    })
+  }
 })
