@@ -17,7 +17,7 @@ export const getGithubProfile = async (username: string) => {
   const res = await fetch(`https://api.github.com/users/${username}`, {
     headers: {
       accept: 'application/vnd.github.v3.json',
-      Authorization: `token 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`
+      Authorization: `token ${process.env.PRIVATE_KEY}`
     }
   })
 
