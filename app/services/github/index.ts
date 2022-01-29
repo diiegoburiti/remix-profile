@@ -21,11 +21,13 @@ export const getGithubProfile = async (username: string) => {
     }
   })
 
+  
+
   if(res.status !== 200) {
     throw new Response("Oops! something went wrong. Please try again later", { status: res.status });
   }
 
-  const { bio, name, avatar_url, html_url, location, login }: UserTypes = await res.json()
+  const { bio, name, avatar_url, html_url, location, login, followers, following }: UserTypes = await res.json()
 
   return {
       avatar_url,
@@ -33,6 +35,8 @@ export const getGithubProfile = async (username: string) => {
       name,
       html_url,
       location,
-      login
+      login,
+      followers,
+      following
   }
 }
