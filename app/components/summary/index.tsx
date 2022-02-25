@@ -1,6 +1,19 @@
-import { Box, Image, List, ListItem, ListIcon, Flex } from '@chakra-ui/react'
-import { InfoIcon as Icon } from '@chakra-ui/icons'
+import {
+  Box,
+  Image,
+  List,
+  ListItem,
+  ListIcon,
+  Flex,
+  Grid,
+  GridItem,
+  Badge,
+  Text,
+  Link
+} from '@chakra-ui/react'
+import { InfoIcon as Icon, ExternalLinkIcon } from '@chakra-ui/icons'
 import { UserTypes } from '~/services/github'
+import { Wrapper } from '~/components/wrapper'
 
 export type SummaryProps = UserTypes
 
@@ -12,53 +25,133 @@ export const Summary = ({
   bio,
   location,
   followers,
-  following
+  following,
+  repositories
 }: SummaryProps) => {
-  const InfoIcon = () =>  <ListIcon as={Icon} color="borderColor" />
-  
+  const InfoIcon = () => <ListIcon as={Icon} color="borderColor" />
+
+  const TextComponent = (text: string) => (
+    <Text as="span" color="gray.500" mr=".6rem">
+      {text}
+    </Text>
+  )
+
+  /*   const Second = ({container}) => {
+    const [showMore, setShowMore] = useState(false);
+ 
+   return(
+     <div>
+       {container?.slice(0, 5).map((container) => (
+          <h3>{container}</h3>
+       ))}
+       
+       {showMore && container?.slice(5).map((container) => (
+          <h3>{container}</h3>
+       ))} //this would show the remaining values
+       <button type="button" class="btn btn-primary" onClick={() => setShowMore(true)}>Primary</button>
+     </div>
+  )
+ } */
 
   return (
-    <Flex justifyContent="space-evenly" alignItems="center">
-      <Image
-        src={avatar_url}
-        alt={`${name} avatar`}
-        boxSize="168px"
-        objectFit="cover"
-        borderRadius="full"
-        borderWidth="5px"
-        borderColor="borderColor"
-      />
-      <Box
-        borderWidth="1px"
-        borderRadius="lg"
-        py="2"
-        borderColor="borderColor"
-        w="20rem"
-      >
-        <List spacing={2} color="fontColor" ml="2">
-          <ListItem>
-            <InfoIcon />
-            Name: {name}
-          </ListItem>
-          <ListItem>
-            <InfoIcon />
-            Nickname: {login}
-          </ListItem>
-          <ListItem>
-            <InfoIcon />
-            Followers: {followers}
-          </ListItem>
-          <ListItem>
-            <InfoIcon />
-            Following: {following}
-          </ListItem>
+    <Wrapper flexDir="column">
+      <Flex justifyContent="space-evenly" alignItems="center">
+        <Image
+          src={avatar_url}
+          alt={`${name} avatar`}
+          boxSize="168px"
+          objectFit="cover"
+          borderRadius="full"
+          borderWidth="5px"
+          borderColor="borderColor"
+        />
+        <Box
+          borderWidth="1px"
+          borderRadius="lg"
+          borderColor="borderColor"
+          py="2"
+          w="20rem"
+        >
+          <List spacing={2} color="fontColor" ml="2">
+            <ListItem>
+              <InfoIcon />
+              Name: {name}
+            </ListItem>
+            <ListItem>
+              <InfoIcon />
+              Nickname: {login}
+            </ListItem>
+            <ListItem>
+              <InfoIcon />
+              Followers: {followers}
+            </ListItem>
+            <ListItem>
+              <InfoIcon />
+              Following: {following}
+            </ListItem>
 
-          <ListItem>
-            <InfoIcon />
-            Location: {location}
-          </ListItem>
-        </List>
-      </Box>
-    </Flex>
+            <ListItem>
+              <InfoIcon />
+              Location: {location}
+            </ListItem>
+          </List>
+        </Box>
+      </Flex>
+
+      <Grid templateColumns="repeat(2, 1fr)" gap={2} mt="6rem">
+        {repositories.map((repository) => (
+          <GridItem key={repository.id}>
+            <Box borderWidth="1px" borderRadius="lg" borderColor="borderColor">
+              <Box
+                mt="1"
+                fontWeight="semibold"
+                as="h4"
+                lineHeight="tight"
+                isTruncated
+                color="fontColor"
+              >
+                <Text as="span" color="gray.500" mr=".6rem" fontWeight="normal">
+                  Repository Name:
+                </Text>
+                {repository.name}
+              </Box>
+              <Text color="fontColor" isTruncated maxWidth="15rem">
+                {repository.description}
+              </Text>
+              <Text color="fontColor">
+                <Text as="span" color="gray.500" mr=".6rem">
+                  Created At:
+                </Text>
+                {repository.created_at}
+              </Text>
+
+              <Text color="fontColor" noOfLines={1}>
+                <Text as="span" color="gray.500" mr=".6rem">
+                  Description:
+                </Text>
+                {repository.description}
+              </Text>
+
+              <Text color="gray.500">
+                Repository link:
+                <Link
+                  href="https://chakra-ui.com"
+                  isExternal
+                  color="fontColor"
+                  ml=".6rem"
+                >
+                  Chakra Design system <ExternalLinkIcon mx="2px" />
+                </Link>
+              </Text>
+
+              {/* <span>{repository.clone_url}</span> */}
+              <Badge borderRadius="full" px="2" colorScheme="white">
+                {repository.language}
+              </Badge>
+            </Box>
+          </GridItem>
+        ))}
+      </Grid>
+    </Wrapper>
   )
 }
