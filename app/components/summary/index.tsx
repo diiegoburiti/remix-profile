@@ -9,11 +9,13 @@ import {
   GridItem,
   Badge,
   Text,
-  Link
+  Link,
+  Heading
 } from '@chakra-ui/react'
 import { InfoIcon as Icon, ExternalLinkIcon } from '@chakra-ui/icons'
 import { UserTypes } from '~/services/github'
 import { Wrapper } from '~/components/wrapper'
+import { formatDate } from '~/utils/date'
 
 export type SummaryProps = UserTypes
 
@@ -98,7 +100,10 @@ export const Summary = ({
         </Box>
       </Flex>
 
-      <Grid templateColumns="repeat(2, 1fr)" gap={2} mt="6rem">
+      <Heading color="fontColor" textAlign="center" my="1.6rem">
+        Repositories
+      </Heading>
+      <Grid templateColumns="repeat(2, 1fr)" gap={2}>
         {repositories.map((repository) => (
           <GridItem key={repository.id}>
             <Box
@@ -108,9 +113,7 @@ export const Summary = ({
               p="2"
             >
               <Box
-                mt="1"
                 fontWeight="semibold"
-                as="h4"
                 lineHeight="tight"
                 isTruncated
                 color="fontColor"
@@ -147,7 +150,7 @@ export const Summary = ({
                 <Text as="span" color="gray.500" mr=".6rem">
                   Created At:
                 </Text>
-                {repository.created_at}
+                {formatDate(repository.created_at)}
               </Text>
 
               <Text color="fontColor" noOfLines={1}>
