@@ -101,7 +101,12 @@ export const Summary = ({
       <Grid templateColumns="repeat(2, 1fr)" gap={2} mt="6rem">
         {repositories.map((repository) => (
           <GridItem key={repository.id}>
-            <Box borderWidth="1px" borderRadius="lg" borderColor="borderColor">
+            <Box
+              borderWidth="1px"
+              borderRadius="lg"
+              borderColor="borderColor"
+              p="2"
+            >
               <Box
                 mt="1"
                 fontWeight="semibold"
@@ -110,10 +115,30 @@ export const Summary = ({
                 isTruncated
                 color="fontColor"
               >
-                <Text as="span" color="gray.500" mr=".6rem" fontWeight="normal">
-                  Repository Name:
-                </Text>
-                {repository.name}
+                <Flex alignItems="center" justifyContent="space-between">
+                  <div>
+                    <Text
+                      as="span"
+                      color="gray.500"
+                      mr=".6rem"
+                      fontWeight="normal"
+                    >
+                      Repository Name:
+                    </Text>
+                    {repository.name}
+                  </div>
+
+                  {repository.language && (
+                    <Badge
+                      variant="outline"
+                      borderRadius="full"
+                      colorScheme="pink"
+                      p="1"
+                    >
+                      {repository.language}
+                    </Badge>
+                  )}
+                </Flex>
               </Box>
               <Text color="fontColor" isTruncated maxWidth="15rem">
                 {repository.description}
@@ -143,11 +168,6 @@ export const Summary = ({
                   Chakra Design system <ExternalLinkIcon mx="2px" />
                 </Link>
               </Text>
-
-              {/* <span>{repository.clone_url}</span> */}
-              <Badge borderRadius="full" px="2" colorScheme="white">
-                {repository.language}
-              </Badge>
             </Box>
           </GridItem>
         ))}
