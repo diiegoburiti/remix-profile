@@ -103,6 +103,7 @@ export const Summary = ({
       <Heading color="fontColor" textAlign="center" my="1.6rem">
         Repositories
       </Heading>
+
       <Grid templateColumns="repeat(2, 1fr)" gap={2}>
         {repositories.map((repository) => (
           <GridItem key={repository.id}>
@@ -160,17 +161,12 @@ export const Summary = ({
                 {repository.description}
               </Text>
 
-              <Text color="gray.500">
-                Repository link:
-                <Link
-                  href="https://chakra-ui.com"
-                  isExternal
-                  color="fontColor"
-                  ml=".6rem"
-                >
-                  Chakra Design system <ExternalLinkIcon mx="2px" />
-                </Link>
-              </Text>
+              <Link href={repository.clone_url} isExternal color="fontColor">
+                <Flex alignItems="center">
+                  <span>Repository link</span>
+                  <ExternalLinkIcon ml="0.6rem" color="fontColor" />
+                </Flex>
+              </Link>
             </Box>
           </GridItem>
         ))}
