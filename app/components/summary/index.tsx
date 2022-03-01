@@ -144,9 +144,6 @@ export const Summary = ({
                   )}
                 </Flex>
               </Box>
-              <Text color="fontColor" isTruncated maxWidth="15rem">
-                {repository.description}
-              </Text>
               <Text color="fontColor">
                 <Text as="span" color="gray.500" mr=".6rem">
                   Created At:
