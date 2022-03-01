@@ -10,12 +10,14 @@ import {
   Badge,
   Text,
   Link,
-  Heading
+  Heading,
+  Button
 } from '@chakra-ui/react'
 import { InfoIcon as Icon, ExternalLinkIcon } from '@chakra-ui/icons'
 import { UserTypes } from '~/services/github'
 import { Wrapper } from '~/components/wrapper'
 import { formatDate } from '~/utils/date'
+import { useState } from 'react'
 
 export type SummaryProps = UserTypes
 
@@ -30,30 +32,19 @@ export const Summary = ({
   following,
   repositories
 }: SummaryProps) => {
+  const repositoriesArrayLength = repositories.length
+
+  const [repositoriesPerClick, setRepositoriesPerClick] = useState(6)
+
+  const disabledButton = repositoriesArrayLength <= repositoriesPerClick
+
+  const handleLoadMoreRepositories = () => {
+    setRepositoriesPerClick((prevNumber) => prevNumber + 6)
+  }
+
   const InfoIcon = () => <ListIcon as={Icon} color="borderColor" />
 
-  const TextComponent = (text: string) => (
-    <Text as="span" color="gray.500" mr=".6rem">
-      {text}
-    </Text>
-  )
-
-  /*   const Second = ({container}) => {
-    const [showMore, setShowMore] = useState(false);
- 
-   return(
-     <div>
-       {container?.slice(0, 5).map((container) => (
-          <h3>{container}</h3>
-       ))}
-       
-       {showMore && container?.slice(5).map((container) => (
-          <h3>{container}</h3>
-       ))} //this would show the remaining values
-       <button type="button" class="btn btn-primary" onClick={() => setShowMore(true)}>Primary</button>
-     </div>
-  )
- } */
+  const arrayOfRepositories = repositories.slice(0, repositoriesPerClick)
 
   return (
     <Wrapper flexDir="column">
@@ -105,7 +96,7 @@ export const Summary = ({
       </Heading>
 
       <Grid templateColumns="repeat(2, 1fr)" gap={2}>
-        {repositories.map((repository) => (
+        {arrayOfRepositories.map((repository) => (
           <GridItem key={repository.id}>
             <Box
               borderWidth="1px"
@@ -168,6 +159,18 @@ export const Summary = ({
           </GridItem>
         ))}
       </Grid>
+      <Button
+        onClick={handleLoadMoreRepositories}
+        disabled={disabledButton}
+        my="1.6rem"
+        mx="auto"
+        display="block"
+        backgroundColor="borderColor"
+        color="fontColor"
+        _hover={{ bg: 'bg' }}
+      >
+        Load More
+      </Button>
     </Wrapper>
   )
 }
