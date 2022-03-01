@@ -1,3 +1,5 @@
+import { fetchGithubUrl } from '~/utils/request'
+
 type RepositoryTypes = {
   id: string
   name: string
@@ -25,23 +27,19 @@ export type LoaderData = {
 }
 
 export const getGithubProfile = async (username: string) => {
-  const res = await fetch(`https://api.github.com/users/${username}`, {
-    headers: {
-      accept: 'application/vnd.github.v3.json',
-      Authorization: `token ${process.env.PRIVATE_KEY}`
-    }
-  })
+  const response = await fetchGithubUrl(
+    `https://api.github.com/users/${username}`
+  )
 
-  if (res.status !== 200) {
+  if (response.status !== 200) {
     throw new Response('Oops! something went wrong. Please try again later', {
-      status: res.status
+      status: response.status
     })
   }
 
-  const response: UserTypes = await res.json()
+  const userResponse: UserTypes = await response.json()
 
-  const repos = await fetch(response.repos_url)
-
+  const repos = await fetchGithubUrl(userResponse.repos_url)
   const repositories = await repos.json()
 
   const {
@@ -54,7 +52,7 @@ export const getGithubProfile = async (username: string) => {
     followers,
     following,
     repos_url
-  } = response
+  } = userResponse
 
   return {
     avatar_url,
