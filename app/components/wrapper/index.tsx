@@ -8,7 +8,7 @@ type WrapperProps = {
 export const Wrapper = ({ children, ...props }: WrapperProps) => {
   return (
     <ScaleFade initialScale={0.9} in={true}>
-      <Container {...props} maxW="container.lg">
+      <Container {...props} maxW="container.lg" h="100vh">
         {children}
       </Container>
     </ScaleFade>
