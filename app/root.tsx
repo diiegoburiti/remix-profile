@@ -11,6 +11,7 @@ import React from 'react'
 import type { MetaFunction } from 'remix'
 import { ChakraProvider, Box, Heading, CSSReset } from '@chakra-ui/react'
 import { theme } from '~/styles/theme'
+import { Footer } from '~/components/footer'
 
 export const meta: MetaFunction = () => {
   return { title: 'New Remix App' }
@@ -22,6 +23,7 @@ export default function App() {
       <ChakraProvider theme={theme}>
         <CSSReset />
         <Outlet />
+        <Footer />
       </ChakraProvider>
     </Document>
   )
