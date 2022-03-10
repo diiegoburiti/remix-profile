@@ -3,7 +3,6 @@ import {
   Image,
   List,
   ListItem,
-  ListIcon,
   Flex,
   Grid,
   GridItem,
@@ -16,6 +15,7 @@ import {
 import { InfoIcon as Icon, ExternalLinkIcon } from '@chakra-ui/icons'
 import { UserTypes } from '~/services/github'
 import { Wrapper } from '~/components/wrapper'
+import { InfoIcon } from '~/components/InfoIcon'
 import { formatDate } from '~/utils/date'
 import { useState } from 'react'
 
@@ -41,8 +41,6 @@ export const Summary = ({
   const handleLoadMoreRepositories = () => {
     setRepositoriesPerClick((prevNumber) => prevNumber + 6)
   }
-
-  const InfoIcon = () => <ListIcon as={Icon} color="borderColor" />
 
   const arrayOfRepositories = repositories.slice(0, repositoriesPerClick)
 
