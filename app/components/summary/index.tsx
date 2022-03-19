@@ -12,12 +12,17 @@ import {
   Heading,
   Button
 } from '@chakra-ui/react'
-import { InfoIcon as Icon, ExternalLinkIcon } from '@chakra-ui/icons'
+import {
+  InfoIcon as Icon,
+  ExternalLinkIcon,
+  ArrowBackIcon
+} from '@chakra-ui/icons'
 import { UserTypes } from '~/services/github'
 import { Wrapper } from '~/components/wrapper'
 import { InfoIcon } from '~/components/InfoIcon'
 import { formatDate } from '~/utils/date'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export type SummaryProps = UserTypes
 
@@ -32,10 +37,9 @@ export const Summary = ({
   following,
   repositories
 }: SummaryProps) => {
+  const navigate = useNavigate()
   const repositoriesArrayLength = repositories.length
-
   const [repositoriesPerClick, setRepositoriesPerClick] = useState(6)
-
   const disabledButton = repositoriesArrayLength <= repositoriesPerClick
 
   const handleLoadMoreRepositories = () => {
@@ -44,9 +48,28 @@ export const Summary = ({
 
   const arrayOfRepositories = repositories.slice(0, repositoriesPerClick)
 
+  const handleToThePreviousPage = () => {
+    return navigate(-1)
+  }
+
   return (
     <Wrapper flexDir="column">
       <Flex justifyContent="space-evenly" alignItems="center">
+        <Button
+          aria-label="button go to back to previous page"
+          onClick={handleToThePreviousPage}
+          display="flex"
+          alignSelf="baseline"
+          border="2px"
+          borderColor="borderColor"
+          _hover={{
+            bg: 'borderColor',
+            color: 'fontColor',
+            borderColor: 'fontColor'
+          }}
+        >
+          <ArrowBackIcon w={8} h={8} aria />
+        </Button>
         <Image
           src={avatar_url}
           alt={`${name} avatar`}
