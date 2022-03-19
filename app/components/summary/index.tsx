@@ -110,13 +110,13 @@ export const Summary = ({
 
             <ListItem>
               <Link
-                href="https://gist.github.com/diiegoburiti"
+                href={`https://gist.github.com/${login}`}
                 isExternal
                 color="fontColor"
               >
                 <Flex alignItems="center">
                   <InfoIcon />
-                  <span>{name} gists</span>
+                  <span>{name || login} gists</span>
                   <ExternalLinkIcon ml="0.6rem" color="borderColor" />
                 </Flex>
               </Link>
