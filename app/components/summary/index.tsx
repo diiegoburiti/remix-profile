@@ -103,7 +103,6 @@ export const Summary = ({
               <InfoIcon />
               Following: {following}
             </ListItem>
-
             <ListItem>
               <InfoIcon />
               Location: {location}

@@ -1,3 +1,5 @@
-import { ListIcon, Icon } from '@chakra-ui/react'
+import { InfoOutlineIcon } from '@chakra-ui/icons'
 
-export const InfoIcon = () => <ListIcon as={Icon} color="borderColor" />
+export const InfoIcon = () => (
+  <InfoOutlineIcon color="borderColor" w={4} h={4} mr={2} />
+)
