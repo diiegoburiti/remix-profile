@@ -107,6 +107,20 @@ export const Summary = ({
               <InfoIcon />
               Location: {location}
             </ListItem>
+
+            <ListItem>
+              <Link
+                href="https://gist.github.com/diiegoburiti"
+                isExternal
+                color="fontColor"
+              >
+                <Flex alignItems="center">
+                  <InfoIcon />
+                  <span>{name} gists</span>
+                  <ExternalLinkIcon ml="0.6rem" color="borderColor" />
+                </Flex>
+              </Link>
+            </ListItem>
           </List>
         </Box>
       </Flex>
@@ -172,7 +186,7 @@ export const Summary = ({
               <Link href={repository.clone_url} isExternal color="fontColor">
                 <Flex alignItems="center">
                   <span>Repository link</span>
-                  <ExternalLinkIcon ml="0.6rem" color="fontColor" />
+                  <ExternalLinkIcon ml="0.6rem" color="borderColor" />
                 </Flex>
               </Link>
             </Box>
